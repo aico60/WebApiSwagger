@@ -49,7 +49,10 @@ namespace WebApiSwagger
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApiSwagger v1"));
             }
-
+            using (var scope =
+  app.ApplicationServices.CreateScope())
+            using (var context = scope.ServiceProvider.GetService<ApplicationDbContext>())
+                context.Database.Migrate();
             app.UseHttpsRedirection();
 
             app.UseRouting();

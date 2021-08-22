@@ -24,14 +24,14 @@ namespace WebApiSwagger.Controllers
         }
 
         [HttpGet]
-        [Route("api/[controller]/GetAllBooks")]
-        public IActionResult GetBooks()
+        [Route("api/[controller]")]
+        public IActionResult GetAllBooks()
         {
             return Ok(this.bookService.GetAllBooks());
         }
 
         [HttpGet]
-        [Route("api/[controller]/GetBookById")]
+        [Route("api/[controller]/{id}")]
         public IActionResult GetBook(int? id)
         {
             if (this.bookService.GetBookById(id) != null)
@@ -51,7 +51,7 @@ namespace WebApiSwagger.Controllers
         }
 
         [HttpPost]
-        [Route("api/[controller]/Edit")]
+        [Route("api/[controller]")]
         public IActionResult Edit(Book book)
         {
             if (this.bookService.GetBookById(book.Id) != null)
@@ -64,7 +64,7 @@ namespace WebApiSwagger.Controllers
         }
 
         [HttpDelete]
-        [Route("api/[controller]/Delete")]
+        [Route("api/[controller]/{id}")]
         public IActionResult Delete(int? id)
         {
             if (this.bookService.GetBookById(id) != null)
