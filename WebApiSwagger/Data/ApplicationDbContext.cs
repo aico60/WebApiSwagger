@@ -11,9 +11,5 @@ namespace WebApiSwagger.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Book> Books { get; set; }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("server=(localdb)\\mssqllocaldb;Initial Catalog=WebApiSwagger;Trusted_Connection=True;MultipleActiveResultSets=true");
-        }
     }
 }
