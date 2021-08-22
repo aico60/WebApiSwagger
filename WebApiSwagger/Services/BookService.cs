@@ -17,8 +17,15 @@ namespace WebApiSwagger.Services
         }
         public void CreateBook(Book book)
         {
-            this._context.Books.Add(book);
-            this._context.SaveChangesAsync();
+            var bookToAdd = new Book
+            {
+                Name = book.Name,
+                Description = book.Description,
+                Price = book.Price,
+                Year = book.Year
+            };
+            this._context.Books.Add(bookToAdd);
+            this._context.SaveChanges();
         }
 
         public ICollection<Book> GetAllBooks()
@@ -36,15 +43,19 @@ namespace WebApiSwagger.Services
         {
             var bookToEdit = this._context.Books.FirstOrDefault(m => m.Id == book.Id);
             bookToEdit.Name = book.Name;
-            this._context.Update(bookToEdit);
-            this._context.SaveChangesAsync();
+            bookToEdit.Description = book.Description;
+            bookToEdit.Year = book.Year;
+            bookToEdit.Price = book.Price;
+
+            //this._context.Update(bookToEdit);
+            this._context.SaveChanges();
         }
 
         public void DeleteBook(int? id)
         {
-            var book = this._context.Books.FirstOrDefault(m => m.Id == id);
-            this._context.Remove(book);
-            this._context.SaveChangesAsync();
+            var bookToDelete = this._context.Books.FirstOrDefault(m => m.Id == id);
+            this._context.Remove(bookToDelete);
+            this._context.SaveChanges();
         }
     }
 }
